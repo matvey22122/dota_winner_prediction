@@ -126,29 +126,29 @@ traindf_X = traindf.drop(['radiant_win'], axis=1)
 # %%
 traindf_X.head()
 
-# %%
-model = LogisticRegression(solver='lbfgs')
+# # %%
+# model = LogisticRegression(solver='lbfgs')
 
 # %%
 # calcuate ROC-AUC for each split
 cv = ShuffleSplit(n_splits=5, test_size=0.2, random_state=8)
-cv_score_mean = (cross_val_score(model, traindf_X, traindf_y.values.ravel(), cv=cv, scoring='roc_auc')).mean()
-print(cv_score_mean)
+# cv_score_mean = (cross_val_score(model, traindf_X, traindf_y.values.ravel(), cv=cv, scoring='roc_auc')).mean()
+# print(cv_score_mean)
+
+# # %%
+# rfc = RandomForestClassifier(random_state=42)
+#
+# # %%
+# param_grid = {
+#     'n_estimators': [200, 500],
+#     'max_features': ['auto', 'sqrt', 'log2'],
+#     'max_depth': [4, 5, 6, 7, 8],
+#     'criterion': ['gini', 'entropy']
+# }
 
 # %%
-rfc = RandomForestClassifier(random_state=42)
-
-# %%
-param_grid = {
-    'n_estimators': [200, 500],
-    'max_features': ['auto', 'sqrt', 'log2'],
-    'max_depth': [4, 5, 6, 7, 8],
-    'criterion': ['gini', 'entropy']
-}
-
-# %%
-CV_rfc = GridSearchCV(estimator=rfc, param_grid=param_grid, cv=5)
-CV_rfc.fit(traindf_X, traindf_y.values.ravel())
+# CV_rfc = GridSearchCV(estimator=rfc, param_grid=param_grid, cv=5)
+# CV_rfc.fit(traindf_X, traindf_y.values.ravel())
 
 # %%
 clf = RandomForestClassifier(n_estimators=15, random_state=42, criterion="entropy", max_depth=6)
